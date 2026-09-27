@@ -23,6 +23,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "👋 أهلاً بيك!\n\n"
         "ابعت رابط الفيديو وأنا هحاول تحميله وإرساله ليك."
     )
+     async def get_id(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        f"🆔 ID: {update.effective_user.id}\n"
+        f"👤 الاسم: {update.effective_user.first_name}\n"
+        f"🔹 username: @{update.effective_user.username or 'لا يوجد'}"
+    )
 
 async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
     url = update.message.text.strip()
@@ -79,6 +85,7 @@ async def main():
     application = Application.builder().token(TOKEN).build()
 
     application.add_handler(CommandHandler("start", start))
+application.add_handler(CommandHandler("id", get_id))
     application.add_handler(
         MessageHandler(filters.TEXT & ~filters.COMMAND, download_video)
     )
