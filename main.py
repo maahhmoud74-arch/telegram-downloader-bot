@@ -7,6 +7,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, ContextTyp
 import yt_dlp
 
 TOKEN = os.environ["BOT_TOKEN"]
+ADMIN_ID = 6011229637
 
 app = Flask(__name__)
 
